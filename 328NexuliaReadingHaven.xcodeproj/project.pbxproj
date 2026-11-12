@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03D9E7C581A3BE4A6C7F9B1D /* RioSetupConfiguration+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B7C5A36F819C2E4A5D7F9B /* RioSetupConfiguration+App.swift */; };
 		062427740F69AA6EA9F7F3BD /* imgBookStack.png in Resources */ = {isa = PBXBuildFile; fileRef = A12590BF2A04E93EF74141A0 /* imgBookStack.png */; };
 		1C40A8EDEE6FE435D02F06A0 /* UndoSnackbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB78A822BD5858CD34E93FE /* UndoSnackbar.swift */; };
 		21D271C74ABA77B8CB1F9D4E /* BookSynopsis.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48D3827CF9AA09B9AC9B89A /* BookSynopsis.swift */; };
@@ -31,8 +32,10 @@
 		AADDFBE7D6C39BF0EBCB25D0 /* bannerPenNotes.png in Resources */ = {isa = PBXBuildFile; fileRef = 81EC86985F04686ABE13B3B7 /* bannerPenNotes.png */; };
 		AB566EE3CBDEB4A63AFA4682 /* AppButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F9FA93BFBC54F5F233E3E8 /* AppButtonStyles.swift */; };
 		ACB125753EF4CAFD49263C43 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFDCB7061DB9059EC358E0B8 /* Assets.xcassets */; };
+		C9F5A3E14D6F8A0C2E3B5D7F /* RioSetupKit in Frameworks */ = {isa = PBXBuildFile; productRef = B8E4F2D03C5E7F9B1D2A4C6E /* RioSetupKit */; };
 		D7DD8489542CD571C496006D /* AppLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0554382196527220F001F781 /* AppLinks.swift */; };
 		DF040CAC4769D66155ADED00 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBD8D2224198BEB1A1B77389 /* LaunchScreen.storyboard */; };
+		F2C8D6B47092AD3F5B6E8A0C /* RioSetupSecrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A6B4F25E708B1D3F4C6E8A /* RioSetupSecrets.swift */; };
 		F40F499CC8BC9F4216E32AD3 /* SynopsisEditorSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706273C19B3B922BADBA71ED /* SynopsisEditorSheet.swift */; };
 /* End PBXBuildFile section */
 
@@ -67,7 +70,9 @@
 		BB554994B4F1496BBCB5FF24 /* ContentView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C0043E748E834BE5409E793C /* AppDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C918BCE9926E53384D7F697B /* AppDataStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppDataStore.swift; sourceTree = "<group>"; };
+		D0A6B4F25E708B1D3F4C6E8A /* RioSetupSecrets.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RioSetupSecrets.swift; sourceTree = "<group>"; };
 		DBD8D2224198BEB1A1B77389 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E1B7C5A36F819C2E4A5D7F9B /* RioSetupConfiguration+App.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "RioSetupConfiguration+App.swift"; sourceTree = "<group>"; };
 		F48D3827CF9AA09B9AC9B89A /* BookSynopsis.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BookSynopsis.swift; sourceTree = "<group>"; };
 		FCFAB955D666C361DA16D807 /* 328NexuliaReadingHaven.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 328NexuliaReadingHaven.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -77,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9F5A3E14D6F8A0C2E3B5D7F /* RioSetupKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,6 +116,15 @@
 				DBD8D2224198BEB1A1B77389 /* LaunchScreen.storyboard */,
 			);
 			path = Base.lproj;
+			sourceTree = "<group>";
+		};
+		14EAF8D692B4CF5B7D8A0C2E /* RioSetup */ = {
+			isa = PBXGroup;
+			children = (
+				D0A6B4F25E708B1D3F4C6E8A /* RioSetupSecrets.swift */,
+				E1B7C5A36F819C2E4A5D7F9B /* RioSetupConfiguration+App.swift */,
+			);
+			path = RioSetup;
 			sourceTree = "<group>";
 		};
 		208CE799DB78DEE26ADCAF82 /* bannerPenNotes.imageset */ = {
@@ -294,6 +309,7 @@
 			children = (
 				C0043E748E834BE5409E793C /* AppDelegate.swift */,
 				7340D1036CC3810A8E0A69B8 /* SceneDelegate.swift */,
+				14EAF8D692B4CF5B7D8A0C2E /* RioSetup */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -315,6 +331,9 @@
 			dependencies = (
 			);
 			name = 328NexuliaReadingHaven;
+			packageProductDependencies = (
+				B8E4F2D03C5E7F9B1D2A4C6E /* RioSetupKit */,
+			);
 			productName = 328NexuliaReadingHaven;
 			productReference = FCFAB955D666C361DA16D807 /* 328NexuliaReadingHaven.app */;
 			productType = "com.apple.product-type.application";
@@ -337,6 +356,9 @@
 				Base,
 			);
 			mainGroup = 59164A258C375241CE1885E7;
+			packageReferences = (
+				A7F3E1C92B4D6E8A0C1F3B5D /* XCLocalSwiftPackageReference "Packages/RioSetupKit" */,
+			);
 			productRefGroup = BBF435CB3512BBC24E949858 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -394,6 +416,8 @@
 			files = (
 				443FE0F49A31F80F1603DA1D /* AppDelegate.swift in Sources */,
 				6D2582ED0DC85A57DEA22E57 /* SceneDelegate.swift in Sources */,
+				F2C8D6B47092AD3F5B6E8A0C /* RioSetupSecrets.swift in Sources */,
+				03D9E7C581A3BE4A6C7F9B1D /* RioSetupConfiguration+App.swift in Sources */,
 				AB566EE3CBDEB4A63AFA4682 /* AppButtonStyles.swift in Sources */,
 				740A291B583B8D178DEFF8C0 /* ShelfRailView.swift in Sources */,
 				1C40A8EDEE6FE435D02F06A0 /* UndoSnackbar.swift in Sources */,
@@ -433,12 +457,12 @@
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = 328NexuliaReadingHaven/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Nexulia Reading Haven";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pha.n3x8l19r36d8ngh2v0n;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
@@ -495,7 +519,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -523,12 +547,12 @@
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = 328NexuliaReadingHaven/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Nexulia Reading Haven";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pha.n3x8l19r36d8ngh2v0n;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
@@ -592,7 +616,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -629,6 +653,21 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		A7F3E1C92B4D6E8A0C1F3B5D /* XCLocalSwiftPackageReference "Packages/RioSetupKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/RioSetupKit;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B8E4F2D03C5E7F9B1D2A4C6E /* RioSetupKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A7F3E1C92B4D6E8A0C1F3B5D /* XCLocalSwiftPackageReference "Packages/RioSetupKit" */;
+			productName = RioSetupKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 356A06209ECD5D31BFA0F5BC /* Project object */;
 }
