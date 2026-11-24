@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6B3AAD7F80154F889CF42AD1 /* NexuliaPress.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4D78AB823E5A48F5AA05D8B1 /* NexuliaPress.otf */; };
 		062427740F69AA6EA9F7F3BD /* imgBookStack.png in Resources */ = {isa = PBXBuildFile; fileRef = A12590BF2A04E93EF74141A0 /* imgBookStack.png */; };
 		1C40A8EDEE6FE435D02F06A0 /* UndoSnackbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB78A822BD5858CD34E93FE /* UndoSnackbar.swift */; };
 		21D271C74ABA77B8CB1F9D4E /* BookSynopsis.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48D3827CF9AA09B9AC9B89A /* BookSynopsis.swift */; };
@@ -18,6 +17,7 @@
 		448C30B0653B0A0CF1F819D2 /* bannerPagesGlow.png in Resources */ = {isa = PBXBuildFile; fileRef = 418A0288CE232E409E57E1BB /* bannerPagesGlow.png */; };
 		516F9C1F5F90EECD760023EC /* MainShellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E138AB722B9C545888D792 /* MainShellView.swift */; };
 		5B5575FD98682C8C4A38799D /* DraftEditorSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D121B6339BC08FFF7A4D92 /* DraftEditorSheet.swift */; };
+		6B3AAD7F80154F889CF42AD1 /* NexuliaPress.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4D78AB823E5A48F5AA05D8B1 /* NexuliaPress.otf */; };
 		6CB2BD1B0B3D39ED8FA9A0FC /* SynopsisListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89752FAE5A2415AEB9AE9D4D /* SynopsisListView.swift */; };
 		6D2582ED0DC85A57DEA22E57 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7340D1036CC3810A8E0A69B8 /* SceneDelegate.swift */; };
 		6F1707BE653E04F5A771059A /* SynopsisDraft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52503BB6701C35201EEA80FD /* SynopsisDraft.swift */; };
@@ -31,20 +31,18 @@
 		9D2E4F6A8B0C1D3E5F7A9B2C /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8E1A9F2B4D6E8A0C1F3B5D /* StatisticsView.swift */; };
 		AADDFBE7D6C39BF0EBCB25D0 /* bannerPenNotes.png in Resources */ = {isa = PBXBuildFile; fileRef = 81EC86985F04686ABE13B3B7 /* bannerPenNotes.png */; };
 		AB566EE3CBDEB4A63AFA4682 /* AppButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F9FA93BFBC54F5F233E3E8 /* AppButtonStyles.swift */; };
-		B2D3F4051627384A5B6C7D8E /* AppFormChrome.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C2E3F4051627384A5B6C7D /* AppFormChrome.swift */; };
 		ACB125753EF4CAFD49263C43 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFDCB7061DB9059EC358E0B8 /* Assets.xcassets */; };
+		B2D3F4051627384A5B6C7D8E /* AppFormChrome.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C2E3F4051627384A5B6C7D /* AppFormChrome.swift */; };
 		D7DD8489542CD571C496006D /* AppLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0554382196527220F001F781 /* AppLinks.swift */; };
 		DF040CAC4769D66155ADED00 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBD8D2224198BEB1A1B77389 /* LaunchScreen.storyboard */; };
 		F40F499CC8BC9F4216E32AD3 /* SynopsisEditorSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706273C19B3B922BADBA71ED /* SynopsisEditorSheet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4D78AB823E5A48F5AA05D8B1 /* NexuliaPress.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NexuliaPress.otf; sourceTree = "<group>"; };
 		020749B7BF21DA421BE95C0B /* DraftListView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DraftListView.swift; sourceTree = "<group>"; };
 		0554382196527220F001F781 /* AppLinks.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppLinks.swift; sourceTree = "<group>"; };
 		11E138AB722B9C545888D792 /* MainShellView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MainShellView.swift; sourceTree = "<group>"; };
 		15F9FA93BFBC54F5F233E3E8 /* AppButtonStyles.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppButtonStyles.swift; sourceTree = "<group>"; };
-		A1C2E3F4051627384A5B6C7D /* AppFormChrome.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppFormChrome.swift; sourceTree = "<group>"; };
 		2AF3DF8A178508BACED20A2C /* Pods-328NexuliaReadingHaven.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-328NexuliaReadingHaven.debug.xcconfig"; path = "Target Support Files/Pods-328NexuliaReadingHaven/Pods-328NexuliaReadingHaven.debug.xcconfig"; sourceTree = "<group>"; };
 		2FE45CFD6E370C8B7E57771B /* SettingsView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		36442E7939328DA5F51B7B05 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -52,6 +50,7 @@
 		418A0288CE232E409E57E1BB /* bannerPagesGlow.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = bannerPagesGlow.png; sourceTree = "<group>"; };
 		44D121B6339BC08FFF7A4D92 /* DraftEditorSheet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DraftEditorSheet.swift; sourceTree = "<group>"; };
 		47895A7B7E02C1C868ADB44C /* SynopsisDashboardView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SynopsisDashboardView.swift; sourceTree = "<group>"; };
+		4D78AB823E5A48F5AA05D8B1 /* NexuliaPress.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NexuliaPress.otf; sourceTree = "<group>"; };
 		4FA691B35C25848FD4BC3679 /* ShelfRailView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ShelfRailView.swift; sourceTree = "<group>"; };
 		519C30D20FBC2D9530A7F5A1 /* Pods_328NexuliaReadingHaven.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_328NexuliaReadingHaven.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		52503BB6701C35201EEA80FD /* SynopsisDraft.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SynopsisDraft.swift; sourceTree = "<group>"; };
@@ -67,6 +66,7 @@
 		8E2D28C1285BB39A8DE38F88 /* AppScreenBackground.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppScreenBackground.swift; sourceTree = "<group>"; };
 		90A87B1636F201B98E79A9C9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		A12590BF2A04E93EF74141A0 /* imgBookStack.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = imgBookStack.png; sourceTree = "<group>"; };
+		A1C2E3F4051627384A5B6C7D /* AppFormChrome.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppFormChrome.swift; sourceTree = "<group>"; };
 		AFDCB7061DB9059EC358E0B8 /* Assets.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BB554994B4F1496BBCB5FF24 /* ContentView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C0043E748E834BE5409E793C /* AppDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -446,7 +446,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pha.n3x8l19r36d8ngh2v0n;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
@@ -536,7 +536,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pha.n3x8l19r36d8ngh2v0n;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
