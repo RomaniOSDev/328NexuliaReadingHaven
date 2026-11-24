@@ -5,22 +5,20 @@ struct UndoSnackbar: View {
     let onUndo: () -> Void
 
     var body: some View {
-        HStack {
+        HStack(spacing: 12) {
             Text(message)
-                .font(.subheadline.weight(.medium))
-                .foregroundStyle(Color("AppTextPrimary"))
-            Spacer()
+                .font(.subheadline)
+                .foregroundStyle(AppPalette.ink)
+            Spacer(minLength: 8)
             Button("Undo", action: onUndo)
-                .font(.subheadline.weight(.bold))
-                .foregroundStyle(Color("AppAccent"))
+                .buttonStyle(PressButtonStyle(kind: .secondary))
         }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 12)
-        .background(
-            RoundedRectangle(cornerRadius: 12, style: .continuous)
-                .fill(Color("AppSurface"))
-                .shadow(color: Color("AppPrimary").opacity(0.3), radius: 10, y: 4)
-        )
-        .padding(.horizontal, 16)
+        .padding(10)
+        .background {
+            RoundedRectangle(cornerRadius: 8)
+                .fill(AppPalette.surface)
+                .strokeBorder(AppPalette.fieldBorder, lineWidth: 1)
+        }
+        .padding(.horizontal, 24)
     }
 }

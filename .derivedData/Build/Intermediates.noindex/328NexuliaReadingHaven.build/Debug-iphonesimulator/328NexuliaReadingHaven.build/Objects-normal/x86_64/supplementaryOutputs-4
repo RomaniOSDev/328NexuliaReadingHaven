@@ -1,0 +1,23 @@
+{
+  "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/328NexuliaReadingHaven/App/AppDelegate.swift" : {
+    "const-values" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/x86_64/AppDelegate.swiftconstvalues",
+    "dependencies" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/x86_64/AppDelegate.d",
+    "diagnostics" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/x86_64/AppDelegate.dia",
+    "object" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/x86_64/AppDelegate.o",
+    "swift-dependencies" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/x86_64/AppDelegate.swiftdeps"
+  },
+  "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/328NexuliaReadingHaven/App/SceneDelegate.swift" : {
+    "const-values" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/x86_64/SceneDelegate.swiftconstvalues",
+    "dependencies" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/x86_64/SceneDelegate.d",
+    "diagnostics" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/x86_64/SceneDelegate.dia",
+    "object" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/x86_64/SceneDelegate.o",
+    "swift-dependencies" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/x86_64/SceneDelegate.swiftdeps"
+  },
+  "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/328NexuliaReadingHaven/Components/AppButtonStyles.swift" : {
+    "const-values" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/x86_64/AppButtonStyles.swiftconstvalues",
+    "dependencies" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/x86_64/AppButtonStyles.d",
+    "diagnostics" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/x86_64/AppButtonStyles.dia",
+    "object" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/x86_64/AppButtonStyles.o",
+    "swift-dependencies" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/x86_64/AppButtonStyles.swiftdeps"
+  }
+}

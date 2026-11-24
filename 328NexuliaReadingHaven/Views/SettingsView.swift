@@ -10,31 +10,36 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack {
             List {
-                Button("Rate Us") {
-                    requestReview()
+                Section {
+                    settingsRow("Rate Us", icon: "star") { requestReview() }
+                    settingsRow("Privacy Policy", icon: "hand.raised") { open(AppLinks.privacy) }
+                    settingsRow("Terms of Use", icon: "doc.plaintext") { open(AppLinks.terms) }
+                } header: {
+                    Text("About")
                 }
-                Button("Privacy Policy") {
-                    if let url = URL(string: AppLinks.privacy) {
-                        UIApplication.shared.open(url)
+                .listRowBackground(AppPalette.surface)
+
+                Section {
+                    Button(role: .destructive) {
+                        showResetConfirm = true
+                    } label: {
+                        Label("Reset All Data", systemImage: "trash")
+                            .frame(minHeight: 44)
                     }
+                } header: {
+                    Text("Journal data")
                 }
-                Button("Terms of Use") {
-                    if let url = URL(string: AppLinks.terms) {
-                        UIApplication.shared.open(url)
-                    }
-                }
-                Button("Reset All Data", role: .destructive) {
-                    showResetConfirm = true
-                }
+                .listRowBackground(AppPalette.surface)
             }
+            .listStyle(.insetGrouped)
             .scrollContentBackground(.hidden)
-            .background(Color("AppBackground"))
+            .appScreenBackground()
             .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Done") { dismiss() }
-                        .foregroundStyle(Color("AppAccent"))
+                        .foregroundStyle(AppPalette.accent)
                 }
             }
             .confirmationDialog(
@@ -53,8 +58,30 @@ struct SettingsView: View {
                 Text("Please try again later from a device build.")
             }
         }
-        .presentationDetents([.medium, .large])
-        .preferredColorScheme(.dark)
+        .appCompactSheetChrome()
+    }
+
+    private func settingsRow(_ title: String, icon: String, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            HStack {
+                Label(title, systemImage: icon)
+                    .foregroundStyle(AppPalette.ink)
+                Spacer()
+                Image(systemName: "arrow.up.right")
+                    .font(.caption)
+                    .foregroundStyle(AppPalette.accent)
+                    .accessibilityHidden(true)
+            }
+            .frame(minHeight: 44)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+    }
+
+    private func open(_ address: String) {
+        if let url = URL(string: address) {
+            UIApplication.shared.open(url)
+        }
     }
 
     private func requestReview() {

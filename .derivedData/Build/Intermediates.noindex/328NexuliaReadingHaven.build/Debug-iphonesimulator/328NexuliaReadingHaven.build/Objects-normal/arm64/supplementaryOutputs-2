@@ -1,0 +1,23 @@
+{
+  "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/328NexuliaReadingHaven/Components/AppFormChrome.swift" : {
+    "const-values" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/arm64/AppFormChrome.swiftconstvalues",
+    "dependencies" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/arm64/AppFormChrome.d",
+    "diagnostics" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/arm64/AppFormChrome.dia",
+    "object" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/arm64/AppFormChrome.o",
+    "swift-dependencies" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/arm64/AppFormChrome.swiftdeps"
+  },
+  "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/328NexuliaReadingHaven/Components/ShelfRailView.swift" : {
+    "const-values" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/arm64/ShelfRailView.swiftconstvalues",
+    "dependencies" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/arm64/ShelfRailView.d",
+    "diagnostics" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/arm64/ShelfRailView.dia",
+    "object" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/arm64/ShelfRailView.o",
+    "swift-dependencies" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/arm64/ShelfRailView.swiftdeps"
+  },
+  "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/328NexuliaReadingHaven/Components/UndoSnackbar.swift" : {
+    "const-values" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/arm64/UndoSnackbar.swiftconstvalues",
+    "dependencies" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/arm64/UndoSnackbar.d",
+    "diagnostics" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/arm64/UndoSnackbar.dia",
+    "object" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/arm64/UndoSnackbar.o",
+    "swift-dependencies" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/arm64/UndoSnackbar.swiftdeps"
+  }
+}

@@ -18,49 +18,39 @@ struct SynopsisDetailView: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 16) {
-                    VStack(alignment: .leading, spacing: 8) {
-                        HStack(alignment: .top) {
-                            Text(current.bookTitle)
-                                .font(.title2.weight(.bold))
-                                .foregroundStyle(Color("AppTextPrimary"))
-                            Spacer()
-                            StatusBadgeView(status: current.chapterStatus)
-                        }
-                        Text("Chapter \(current.chapter)")
-                            .font(.headline)
-                            .foregroundStyle(Color("AppAccent"))
-                        Text(current.lastEdited, style: .date)
-                            .font(.caption)
-                            .foregroundStyle(Color("AppTextSecondary"))
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .surfaceCard()
-
-                    Text(current.synopsisText)
-                        .font(.body)
-                        .foregroundStyle(Color("AppTextPrimary"))
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .surfaceCard()
-
-                    if let draft = linkedDraft {
-                        Button {
-                            linkedDraftToEdit = draft
-                        } label: {
-                            Label("Open linked draft", systemImage: "link")
-                                .font(.subheadline.weight(.medium))
-                                .foregroundStyle(Color("AppAccent"))
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .contentShape(Rectangle())
-                        }
-                        .buttonStyle(.plain)
-                        .surfaceCard()
-                    }
+            JournalPage {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(current.bookTitle)
+                        .font(.largeTitle.weight(.semibold))
+                        .foregroundStyle(AppPalette.ink)
+                        .accessibilityAddTraits(.isHeader)
+                    Text("Chapter \(current.chapter)")
+                        .font(.subheadline.weight(.medium))
+                        .foregroundStyle(AppPalette.ink)
+                    StatusBadgeView(status: current.chapterStatus)
+                    Text(current.lastEdited, style: .date)
+                        .font(.caption)
+                        .foregroundStyle(AppPalette.muted)
                 }
-                .padding(16)
+
+                JournalRule()
+
+                Text(current.synopsisText)
+                    .font(.body)
+                    .foregroundStyle(AppPalette.ink)
+                    .lineSpacing(5)
+                    .textSelection(.enabled)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+
+                if let draft = linkedDraft {
+                    Button {
+                        linkedDraftToEdit = draft
+                    } label: {
+                        Label("Open linked draft", systemImage: "link")
+                    }
+                    .buttonStyle(PressButtonStyle(kind: .secondary))
+                }
             }
-            .appScreenBackground()
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
@@ -82,13 +72,14 @@ struct SynopsisDetailView: View {
                         chapterStatus: status
                     )
                 }
+                .appSheetChrome()
             }
             .sheet(item: $linkedDraftToEdit) { draft in
                 DraftEditorSheet(mode: .edit(draft)) { title, text, bookId in
                     store.updateDraft(draft, bookTitle: title, draftText: text, bookId: bookId)
                 }
+                .appSheetChrome()
             }
         }
-        .preferredColorScheme(.dark)
     }
 }

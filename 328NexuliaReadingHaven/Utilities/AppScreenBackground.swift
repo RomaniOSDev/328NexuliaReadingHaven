@@ -3,37 +3,55 @@ import SwiftUI
 extension View {
     func appScreenBackground() -> some View {
         frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background {
-                Color("AppBackground")
-                    .overlay {
-                        Image("bgBookDesk")
-                            .resizable()
-                            .scaledToFill()
-                            .opacity(0.35)
-                    }
-                    .clipped()
-                    .ignoresSafeArea()
-                    .allowsHitTesting(false)
-            }
+            .background(AppPalette.background.ignoresSafeArea())
     }
 }
 
-/// Banner image clipped so scaledToFill overflow cannot steal taps from the tab rail above.
-struct ShelfBannerView: View {
-    let imageName: String
-    var height: CGFloat = 140
+struct JournalPage<Content: View>: View {
+    @ViewBuilder var content: () -> Content
 
     var body: some View {
-        Color.clear
-            .frame(maxWidth: .infinity)
-            .frame(height: height)
-            .overlay {
-                Image(imageName)
-                    .resizable()
-                    .scaledToFill()
+        ScrollView {
+            VStack(alignment: .leading, spacing: 22, content: content)
+                .padding(.horizontal, 24)
+                .padding(.top, 22)
+                .padding(.bottom, 28)
+                .frame(maxWidth: 620)
+                .frame(maxWidth: .infinity)
+        }
+        .scrollDismissesKeyboard(.interactively)
+        .appScreenBackground()
+    }
+}
+
+struct JournalHeading: View {
+    let title: String
+    var detail: String? = nil
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 5) {
+            Text(title.uppercased())
+                .font(.press(46, relativeTo: .largeTitle))
+                .foregroundStyle(AppPalette.ink)
+                .accessibilityLabel(title)
+                .accessibilityAddTraits(.isHeader)
+                .fixedSize(horizontal: false, vertical: true)
+
+            if let detail {
+                Text(detail)
+                    .font(.subheadline)
+                    .foregroundStyle(AppPalette.muted)
             }
-            .clipped()
-            .contentShape(Rectangle())
-            .allowsHitTesting(false)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+}
+
+struct JournalRule: View {
+    var body: some View {
+        Rectangle()
+            .fill(AppPalette.rule)
+            .frame(height: 1)
+            .accessibilityHidden(true)
     }
 }

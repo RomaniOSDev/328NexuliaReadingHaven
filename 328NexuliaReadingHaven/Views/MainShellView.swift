@@ -5,27 +5,30 @@ struct MainShellView: View {
     @State private var selectedTab: ShelfTab = .library
     @State private var showSettings = false
 
+    @Binding var showAddSynopsis: Bool
+
     var body: some View {
         VStack(spacing: 0) {
-            ShelfRailView(selection: $selectedTab) {
-                showSettings = true
-            }
-            .zIndex(2)
+            JournalMasthead { showSettings = true }
 
-            Group {
-                switch selectedTab {
-                case .library:
-                    SynopsisListView()
-                case .drafts:
-                    DraftListView()
-                case .overview:
-                    SynopsisDashboardView(selectedTab: $selectedTab)
-                case .stats:
-                    StatisticsView()
-                }
+            TabView(selection: $selectedTab) {
+                SynopsisListView(showAddSheet: $showAddSynopsis)
+                    .tabItem { Label("Library", systemImage: "books.vertical") }
+                    .tag(ShelfTab.library)
+
+                DraftListView()
+                    .tabItem { Label("Drafts", systemImage: "pencil.line") }
+                    .tag(ShelfTab.drafts)
+
+                SynopsisDashboardView(selectedTab: $selectedTab)
+                    .tabItem { Label("Overview", systemImage: "list.bullet.rectangle") }
+                    .tag(ShelfTab.overview)
+
+                StatisticsView()
+                    .tabItem { Label("Stats", systemImage: "chart.bar.xaxis") }
+                    .tag(ShelfTab.stats)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .zIndex(0)
+            .tint(AppPalette.accent)
         }
         .appScreenBackground()
         .sheet(isPresented: $showSettings) {

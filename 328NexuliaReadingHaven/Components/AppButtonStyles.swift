@@ -1,61 +1,105 @@
 import SwiftUI
 
-struct PrimaryGradientButtonStyle: ButtonStyle {
+struct PressButtonStyle: ButtonStyle {
+    enum Kind {
+        case primary
+        case secondary
+    }
+
+    var kind: Kind = .primary
+    @Environment(\.isEnabled) private var isEnabled
+
     func makeBody(configuration: Configuration) -> some View {
+        let shape = RoundedRectangle(cornerRadius: 5)
         configuration.label
-            .font(.headline)
-            .foregroundStyle(Color("AppTextPrimary"))
-            .padding(.horizontal, 20)
-            .padding(.vertical, 12)
-            .background(
-                LinearGradient(
-                    colors: [Color("AppPrimary"), Color("AppAccent")],
-                    startPoint: .leading,
-                    endPoint: .trailing
-                )
-            )
-            .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
-            .shadow(color: Color("AppPrimary").opacity(configuration.isPressed ? 0.15 : 0.35), radius: 10, y: 4)
-            .scaleEffect(configuration.isPressed ? 0.98 : 1)
-            .animation(.easeOut(duration: 0.15), value: configuration.isPressed)
+            .font(.subheadline.weight(.semibold))
+            .multilineTextAlignment(.center)
+            .foregroundStyle(kind == .primary ? AppPalette.buttonInk : AppPalette.accent)
+            .padding(.horizontal, 15)
+            .padding(.vertical, 11)
+            .frame(minHeight: 44)
+            .background {
+                if kind == .primary {
+                    shape.fill(AppPalette.accent)
+                        .overlay {
+                            PressTexture(name: "ButtonInk", opacity: 0.36)
+                                .clipShape(shape)
+                        }
+                } else {
+                    shape.fill(AppPalette.surface)
+                        .overlay {
+                            shape.strokeBorder(AppPalette.fieldBorder, lineWidth: 1)
+                        }
+                }
+            }
+            .overlay {
+                shape.fill(AppPalette.buttonInk.opacity(configuration.isPressed ? 0.16 : 0))
+                    .allowsHitTesting(false)
+            }
+            .contentShape(Rectangle())
+            .opacity(isEnabled ? 1 : 0.48)
     }
 }
 
-struct SurfaceCardModifier: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .padding(14)
-            .background(
-                RoundedRectangle(cornerRadius: 14, style: .continuous)
-                    .fill(
-                        LinearGradient(
-                            colors: [
-                                Color("AppSurface").opacity(0.95),
-                                Color("AppSurface").opacity(0.75)
-                            ],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
-                    )
-            )
-            .shadow(color: Color.black.opacity(0.25), radius: 10, y: 4)
+struct PressTexture: View {
+    let name: String
+    let opacity: Double
+
+    var body: some View {
+        GeometryReader { proxy in
+            Image(name)
+                .resizable()
+                .scaledToFill()
+                .frame(width: proxy.size.width, height: proxy.size.height)
+                .clipped()
+        }
+        .opacity(opacity)
+        .allowsHitTesting(false)
+        .accessibilityHidden(true)
+    }
+}
+
+struct JournalIconButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .font(.system(size: 18, weight: .medium))
+            .foregroundStyle(AppPalette.accent)
+            .frame(width: 44, height: 44)
+            .background {
+                RoundedRectangle(cornerRadius: 5)
+                    .strokeBorder(AppPalette.fieldBorder, lineWidth: 1)
+            }
+            .contentShape(Rectangle())
+            .opacity(configuration.isPressed ? 0.65 : 1)
     }
 }
 
 struct AppFieldModifier: ViewModifier {
+    var isFocused = false
+    var minHeight: CGFloat = 50
+
     func body(content: Content) -> some View {
+        let shape = RoundedRectangle(cornerRadius: 5)
         content
             .font(.body)
-            .foregroundStyle(Color("AppTextPrimary"))
-            .padding(14)
-            .background(
-                RoundedRectangle(cornerRadius: 14, style: .continuous)
-                    .fill(Color("AppSurface").opacity(0.85))
-            )
-            .overlay(
-                RoundedRectangle(cornerRadius: 14, style: .continuous)
-                    .stroke(Color("AppAccent").opacity(0.25), lineWidth: 1)
-            )
+            .foregroundStyle(AppPalette.ink)
+            .tint(AppPalette.accent)
+            .padding(.horizontal, 12)
+            .padding(.vertical, 10)
+            .frame(maxWidth: .infinity, minHeight: minHeight)
+            .background {
+                shape.fill(AppPalette.surface)
+                    .overlay {
+                        PressTexture(name: "FieldPaper", opacity: 0.58)
+                            .clipShape(shape)
+                    }
+                    .overlay {
+                        shape.strokeBorder(
+                            isFocused ? AppPalette.accent : AppPalette.fieldBorder,
+                            lineWidth: isFocused ? 2 : 1
+                        )
+                    }
+            }
     }
 }
 
@@ -63,24 +107,26 @@ struct StatusBadgeView: View {
     let status: ChapterStatus
 
     var body: some View {
-        Text(status.title)
-            .font(.caption2.weight(.semibold))
-            .foregroundStyle(Color("AppTextPrimary"))
-            .padding(.horizontal, 8)
-            .padding(.vertical, 4)
-            .background(
-                Capsule()
-                    .fill(status == .done ? Color("AppAccent").opacity(0.45) : Color("AppPrimary").opacity(0.35))
-            )
+        Label(status.title, systemImage: status == .done ? "checkmark.circle" : "circle.lefthalf.filled")
+            .font(.caption.weight(.medium))
+            .foregroundStyle(status == .done ? AppPalette.blue : AppPalette.accent)
     }
 }
 
 extension View {
-    func surfaceCard() -> some View {
-        modifier(SurfaceCardModifier())
+    func appFieldStyle(isFocused: Bool = false, minHeight: CGFloat = 50) -> some View {
+        modifier(AppFieldModifier(isFocused: isFocused, minHeight: minHeight))
     }
 
-    func appFieldStyle() -> some View {
-        modifier(AppFieldModifier())
+    func appSheetChrome() -> some View {
+        presentationDetents([.large])
+            .presentationDragIndicator(.visible)
+            .presentationBackground(AppPalette.background)
+    }
+
+    func appCompactSheetChrome() -> some View {
+        presentationDetents([.medium, .large])
+            .presentationDragIndicator(.visible)
+            .presentationBackground(AppPalette.background)
     }
 }

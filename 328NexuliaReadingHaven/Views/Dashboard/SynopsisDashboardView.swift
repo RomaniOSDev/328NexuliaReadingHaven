@@ -16,53 +16,25 @@ struct SynopsisDashboardView: View {
     }
 
     var body: some View {
-        VStack(spacing: 0) {
-            ShelfBannerView(imageName: "bannerPagesGlow")
+        JournalPage {
+            JournalHeading(title: "Overview")
 
-            HStack(spacing: 12) {
-                insightChip(title: "Synopses", value: store.synopsisCount, icon: "books.vertical") {
-                    selectedTab = .library
-                }
-                insightChip(title: "Drafts", value: store.draftCount, icon: "pencil.and.outline") {
-                    selectedTab = .drafts
-                }
+            VStack(spacing: 0) {
+                JournalRule()
+                countLink("Synopses", count: store.synopsisCount, tab: .library)
+                JournalRule()
+                countLink("Drafts", count: store.draftCount, tab: .drafts)
+                JournalRule()
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 12)
 
-            if store.dashboardItems.isEmpty {
-                Spacer()
-                Text("Your overview fills in as you add synopses.")
+            if recentItems.isEmpty {
+                Text("Recently edited synopses will appear here.")
                     .font(.subheadline)
-                    .foregroundStyle(Color("AppTextSecondary"))
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 32)
-                Spacer()
+                    .foregroundStyle(AppPalette.muted)
             } else {
-                ScrollView {
-                    LazyVStack(alignment: .leading, spacing: 12) {
-                        Text("Recently edited")
-                            .font(.headline)
-                            .foregroundStyle(Color("AppTextPrimary"))
-                            .padding(.horizontal, 4)
-
-                        ForEach(recentItems) { item in
-                            dashboardRow(for: item)
-                        }
-
-                        if !remainingItems.isEmpty {
-                            Text("All synopses")
-                                .font(.headline)
-                                .foregroundStyle(Color("AppTextPrimary"))
-                                .padding(.horizontal, 4)
-                                .padding(.top, 8)
-
-                            ForEach(remainingItems) { item in
-                                dashboardRow(for: item)
-                            }
-                        }
-                    }
-                    .padding(16)
+                entries("Recently edited", items: recentItems)
+                if !remainingItems.isEmpty {
+                    entries("Other synopses", items: remainingItems)
                 }
             }
         }
@@ -76,78 +48,90 @@ struct SynopsisDashboardView: View {
                     chapterStatus: status
                 )
             }
+            .appSheetChrome()
         }
     }
 
-    private func insightChip(title: String, value: Int, icon: String, action: @escaping () -> Void) -> some View {
-        Button(action: action) {
-            HStack {
-                Image(systemName: icon)
-                    .foregroundStyle(Color("AppAccent"))
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(title)
-                        .font(.caption)
-                        .foregroundStyle(Color("AppTextSecondary"))
-                    Text("\(value)")
-                        .font(.title3.weight(.bold))
-                        .foregroundStyle(Color("AppTextPrimary"))
-                }
+    private func countLink(_ title: String, count: Int, tab: ShelfTab) -> some View {
+        Button {
+            selectedTab = tab
+        } label: {
+            HStack(spacing: 12) {
+                Text(title)
+                    .font(.body)
+                    .foregroundStyle(AppPalette.ink)
                 Spacer()
+                Text(count, format: .number)
+                    .font(.title3.monospacedDigit())
+                    .foregroundStyle(AppPalette.accent)
                 Image(systemName: "chevron.right")
                     .font(.caption.weight(.semibold))
-                    .foregroundStyle(Color("AppTextSecondary"))
+                    .foregroundStyle(AppPalette.accent)
+                    .accessibilityHidden(true)
             }
+            .frame(minHeight: 52)
             .contentShape(Rectangle())
-            .surfaceCard()
         }
         .buttonStyle(.plain)
     }
 
+    private func entries(_ title: String, items: [BookSynopsis]) -> some View {
+        LazyVStack(alignment: .leading, spacing: 0) {
+            Text(title)
+                .font(.title3.weight(.semibold))
+                .foregroundStyle(AppPalette.ink)
+                .accessibilityAddTraits(.isHeader)
+                .padding(.bottom, 9)
+            JournalRule()
+            ForEach(items) { item in
+                dashboardRow(for: item)
+                JournalRule()
+            }
+        }
+    }
+
     private func dashboardRow(for item: BookSynopsis) -> some View {
         let isExpanded = expandedId == item.id
-        return VStack(alignment: .leading, spacing: 10) {
+        return VStack(alignment: .leading, spacing: 9) {
             Button {
-                withAnimation(.easeInOut(duration: 0.2)) {
-                    expandedId = isExpanded ? nil : item.id
-                }
+                expandedId = isExpanded ? nil : item.id
             } label: {
-                HStack(alignment: .top) {
+                HStack(alignment: .firstTextBaseline, spacing: 12) {
                     VStack(alignment: .leading, spacing: 6) {
-                        HStack {
-                            Text(item.bookTitle)
-                                .font(.headline)
-                                .foregroundStyle(Color("AppTextPrimary"))
-                            Spacer()
-                            StatusBadgeView(status: item.chapterStatus)
-                        }
+                        Text(item.bookTitle)
+                            .font(.headline)
+                            .foregroundStyle(AppPalette.ink)
                         Text("Chapter \(item.chapter)")
                             .font(.subheadline)
-                            .foregroundStyle(Color("AppAccent"))
-                        Text(item.excerpt)
-                            .font(.caption)
-                            .foregroundStyle(Color("AppTextSecondary"))
-                            .lineLimit(isExpanded ? nil : 2)
-                        Text("Last edited \(item.lastEdited.formatted(date: .abbreviated, time: .shortened))")
-                            .font(.caption2)
-                            .foregroundStyle(Color("AppTextSecondary"))
+                            .foregroundStyle(AppPalette.muted)
+                        StatusBadgeView(status: item.chapterStatus)
                     }
+                    Spacer(minLength: 2)
                     Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
-                        .foregroundStyle(Color("AppTextSecondary"))
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(AppPalette.accent)
+                        .accessibilityHidden(true)
                 }
+                .multilineTextAlignment(.leading)
+                .frame(maxWidth: .infinity, alignment: .leading)
                 .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
+            .accessibilityValue(isExpanded ? "Expanded" : "Collapsed")
+
+            Text(isExpanded ? item.synopsisText : item.excerpt)
+                .font(isExpanded ? .body : .subheadline)
+                .foregroundStyle(isExpanded ? AppPalette.ink : AppPalette.muted)
+                .lineLimit(isExpanded ? nil : 2)
 
             if isExpanded {
-                Text(item.synopsisText)
-                    .font(.body)
-                    .foregroundStyle(Color("AppTextPrimary"))
-                Button("Edit synopsis") {
-                    editingSynopsis = item
-                }
-                .buttonStyle(PrimaryGradientButtonStyle())
+                Text(item.lastEdited, format: .dateTime.day().month().year().hour().minute())
+                    .font(.caption)
+                    .foregroundStyle(AppPalette.muted)
+                Button("Edit synopsis") { editingSynopsis = item }
+                    .buttonStyle(PressButtonStyle(kind: .secondary))
             }
         }
-        .surfaceCard()
+        .padding(.vertical, 13)
     }
 }

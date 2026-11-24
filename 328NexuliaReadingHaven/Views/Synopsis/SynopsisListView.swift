@@ -16,9 +16,10 @@ enum LibrarySort: String, CaseIterable, Identifiable {
 
 struct SynopsisListView: View {
     @EnvironmentObject private var store: AppDataStore
-    @State private var showAddSheet = false
+    @Binding var showAddSheet: Bool
     @State private var selectedSynopsis: BookSynopsis?
     @State private var searchText = ""
+    @FocusState private var searchFocused: Bool
     @State private var sort: LibrarySort = .titleAZ
     @State private var pendingUndoSynopsis: BookSynopsis?
     @State private var pendingUndoDrafts: [SynopsisDraft] = []
@@ -44,83 +45,66 @@ struct SynopsisListView: View {
     }
 
     var body: some View {
-        VStack(spacing: 0) {
-            ShelfBannerView(imageName: "bannerPenNotes")
-
-            VStack(spacing: 10) {
-                TextField("Search title or chapter", text: $searchText)
-                    .appFieldStyle()
-                Picker("Sort", selection: $sort) {
-                    ForEach(LibrarySort.allCases) { option in
-                        Text(option.title).tag(option)
-                    }
-                }
-                .pickerStyle(.segmented)
-            }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 10)
+        JournalPage {
+            JournalHeading(title: "Library", detail: "\(store.synopsisCount) \(store.synopsisCount == 1 ? "synopsis" : "synopses")")
+            searchBar
 
             if store.synopses.isEmpty {
-                Spacer()
-                VStack(spacing: 16) {
-                    Image(systemName: "book.closed.fill")
-                        .font(.system(size: 48))
-                        .foregroundStyle(Color("AppAccent"))
-                    Text("Add Synopsis")
-                        .font(.title2.weight(.semibold))
-                        .foregroundStyle(Color("AppTextPrimary"))
-                    Text("Capture chapter summaries for your reading list.")
-                        .font(.subheadline)
-                        .foregroundStyle(Color("AppTextSecondary"))
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal, 32)
-                    Button("Add Synopsis") { showAddSheet = true }
-                        .buttonStyle(PrimaryGradientButtonStyle())
-                }
-                Spacer()
-            } else if filteredSynopses.isEmpty {
-                Spacer()
-                Text("No matches for “\(searchText)”.")
-                    .font(.subheadline)
-                    .foregroundStyle(Color("AppTextSecondary"))
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 32)
-                Spacer()
+                AppEmptyState(
+                    artwork: "LibraryBookplate",
+                    title: "Where your reading begins",
+                    message: "Save a chapter summary so you can pick up the story later.",
+                    actionTitle: "Add Synopsis",
+                    action: { showAddSheet = true }
+                )
             } else {
-                List {
-                    ForEach(filteredSynopses) { synopsis in
-                        Button {
-                            selectedSynopsis = synopsis
-                        } label: {
-                            VStack(alignment: .leading, spacing: 6) {
-                                HStack {
-                                    Text(synopsis.bookTitle)
-                                        .font(.headline)
-                                        .foregroundStyle(Color("AppTextPrimary"))
-                                    Spacer()
-                                    StatusBadgeView(status: synopsis.chapterStatus)
-                                }
-                                Text("Chapter \(synopsis.chapter)")
-                                    .font(.subheadline)
-                                    .foregroundStyle(Color("AppAccent"))
-                                Text(synopsis.excerpt)
-                                    .font(.caption)
-                                    .foregroundStyle(Color("AppTextSecondary"))
-                                    .lineLimit(2)
-                            }
-                            .padding(.vertical, 4)
-                            .contentShape(Rectangle())
-                        }
-                        .buttonStyle(.plain)
-                        .listRowBackground(Color("AppSurface").opacity(0.6))
-                    }
-                    .onDelete(perform: deleteSynopses)
+                Button {
+                    showAddSheet = true
+                } label: {
+                    Label("Add Synopsis", systemImage: "plus")
                 }
-                .scrollContentBackground(.hidden)
-                .listStyle(.plain)
+                .buttonStyle(PressButtonStyle())
+
+                if filteredSynopses.isEmpty {
+                    Text("No matches for “\(searchText)”.")
+                        .font(.subheadline)
+                        .foregroundStyle(AppPalette.muted)
+                } else {
+                    LazyVStack(spacing: 0) {
+                        JournalRule()
+                        ForEach(filteredSynopses) { synopsis in
+                            Button {
+                                selectedSynopsis = synopsis
+                            } label: {
+                                JournalEntryRow(
+                                    title: synopsis.bookTitle,
+                                    excerpt: synopsis.excerpt,
+                                    updated: synopsis.lastEdited
+                                ) {
+                                    ViewThatFits(in: .horizontal) {
+                                        HStack(spacing: 12) {
+                                            chapter(synopsis).fixedSize()
+                                            StatusBadgeView(status: synopsis.chapterStatus).fixedSize()
+                                        }
+                                        VStack(alignment: .leading, spacing: 4) {
+                                            chapter(synopsis)
+                                            StatusBadgeView(status: synopsis.chapterStatus)
+                                        }
+                                    }
+                                }
+                            }
+                            .buttonStyle(.plain)
+                            .contextMenu {
+                                Button("Delete", role: .destructive) { deleteSynopsis(synopsis) }
+                            }
+                            .accessibilityAction(named: "Delete") { deleteSynopsis(synopsis) }
+                            JournalRule()
+                        }
+                    }
+                }
             }
         }
-        .overlay(alignment: .bottom) {
+        .safeAreaInset(edge: .bottom, spacing: 0) {
             if showUndoSnackbar, pendingUndoSynopsis != nil {
                 UndoSnackbar(message: "Synopsis removed") {
                     if let synopsis = pendingUndoSynopsis {
@@ -130,34 +114,7 @@ struct SynopsisListView: View {
                     pendingUndoDrafts = []
                     showUndoSnackbar = false
                 }
-                .padding(.bottom, 24)
-                .transition(.move(edge: .bottom).combined(with: .opacity))
-            }
-        }
-        .overlay(alignment: .bottomTrailing) {
-            if !store.synopses.isEmpty {
-                Button {
-                    showAddSheet = true
-                } label: {
-                    Image(systemName: "plus")
-                        .font(.title2.weight(.bold))
-                        .foregroundStyle(Color("AppTextPrimary"))
-                        .padding(18)
-                        .background(
-                            Circle()
-                                .fill(
-                                    LinearGradient(
-                                        colors: [Color("AppPrimary"), Color("AppAccent")],
-                                        startPoint: .topLeading,
-                                        endPoint: .bottomTrailing
-                                    )
-                                )
-                        )
-                        .shadow(color: Color("AppPrimary").opacity(0.35), radius: 10, y: 4)
-                        .contentShape(Circle())
-                }
-                .buttonStyle(.plain)
-                .padding(24)
+                .padding(.bottom, 8)
             }
         }
         .sheet(isPresented: $showAddSheet) {
@@ -169,25 +126,86 @@ struct SynopsisListView: View {
                     chapterStatus: status
                 ) != nil
             }
+            .appSheetChrome()
         }
         .sheet(item: $selectedSynopsis) { synopsis in
             SynopsisDetailView(synopsis: synopsis)
+                .appSheetChrome()
         }
     }
 
-    private func deleteSynopses(at offsets: IndexSet) {
-        for index in offsets {
-            let synopsis = filteredSynopses[index]
-            if let removed = store.deleteSynopsis(synopsis) {
-                pendingUndoSynopsis = removed.0
-                pendingUndoDrafts = removed.1
-                showUndoSnackbar = true
-                DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-                    if pendingUndoSynopsis?.id == removed.0.id {
-                        pendingUndoSynopsis = nil
-                        pendingUndoDrafts = []
-                        showUndoSnackbar = false
+    private var searchBar: some View {
+        HStack(spacing: 9) {
+            HStack(spacing: 9) {
+                Image(systemName: "magnifyingglass")
+                    .font(.system(size: 17, weight: .medium))
+                    .foregroundStyle(AppPalette.accent)
+                    .accessibilityHidden(true)
+                TextField(
+                    "Search title or chapter",
+                    text: $searchText,
+                    prompt: Text("Search title or chapter").foregroundStyle(AppPalette.muted)
+                )
+                .focused($searchFocused)
+                .submitLabel(.search)
+                .onSubmit { searchFocused = false }
+
+                if !searchText.isEmpty {
+                    Button {
+                        searchText = ""
+                    } label: {
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundStyle(AppPalette.muted)
+                            .frame(width: 44, height: 44)
+                            .contentShape(Rectangle())
                     }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel("Clear search")
+                    .padding(.vertical, -7)
+                    .padding(.trailing, -8)
+                }
+            }
+            .appFieldStyle(isFocused: searchFocused)
+
+            if !store.synopses.isEmpty {
+                Menu {
+                    Picker("Sort", selection: $sort) {
+                        ForEach(LibrarySort.allCases) { option in
+                            Text(option.title).tag(option)
+                        }
+                    }
+                } label: {
+                    Image(systemName: "arrow.up.arrow.down")
+                        .foregroundStyle(AppPalette.accent)
+                        .frame(width: 48, height: 50)
+                        .background {
+                            RoundedRectangle(cornerRadius: 5)
+                                .strokeBorder(AppPalette.fieldBorder, lineWidth: 1)
+                        }
+                        .contentShape(Rectangle())
+                }
+                .accessibilityLabel("Sort")
+                .accessibilityValue(sort.title)
+            }
+        }
+    }
+
+    private func chapter(_ synopsis: BookSynopsis) -> some View {
+        Text("Chapter \(synopsis.chapter)")
+            .font(.caption)
+            .foregroundStyle(AppPalette.muted)
+    }
+
+    private func deleteSynopsis(_ synopsis: BookSynopsis) {
+        if let removed = store.deleteSynopsis(synopsis) {
+            pendingUndoSynopsis = removed.0
+            pendingUndoDrafts = removed.1
+            showUndoSnackbar = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+                if pendingUndoSynopsis?.id == removed.0.id {
+                    pendingUndoSynopsis = nil
+                    pendingUndoDrafts = []
+                    showUndoSnackbar = false
                 }
             }
         }

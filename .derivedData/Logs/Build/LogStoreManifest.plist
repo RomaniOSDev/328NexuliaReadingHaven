@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>logFormatVersion</key>
+	<integer>13</integer>
+	<key>logs</key>
+	<dict>
+		<key>736BCC87-D16F-42E8-B278-EC0BC3FFB316</key>
+		<dict>
+			<key>className</key>
+			<string>IDECommandLineBuildLog</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>736BCC87-D16F-42E8-B278-EC0BC3FFB316.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>E</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>60</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>0</integer>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>328NexuliaReadingHaven project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>328NexuliaReadingHaven</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Building project 328NexuliaReadingHaven with scheme 328NexuliaReadingHaven and configuration Debug</string>
+			<key>timeStartedRecording</key>
+			<real>817155858.17445898</real>
+			<key>timeStoppedRecording</key>
+			<real>817155870.21533096</real>
+			<key>title</key>
+			<string>Building project 328NexuliaReadingHaven with scheme 328NexuliaReadingHaven and configuration Debug</string>
+			<key>uniqueIdentifier</key>
+			<string>736BCC87-D16F-42E8-B278-EC0BC3FFB316</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

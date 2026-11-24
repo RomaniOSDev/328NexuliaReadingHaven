@@ -31,182 +31,167 @@ struct StatisticsView: View {
     }
 
     var body: some View {
-        VStack(spacing: 0) {
-            ShelfBannerView(imageName: "bannerPagesGlow")
+        JournalPage {
+            JournalHeading(title: "Stats")
 
             if !hasData {
-                Spacer()
-                VStack(spacing: 12) {
-                    Image(systemName: "chart.bar.xaxis")
-                        .font(.system(size: 44, weight: .semibold))
-                        .foregroundStyle(Color("AppAccent"))
+                VStack(alignment: .leading, spacing: 9) {
+                    JournalRule()
                     Text("No statistics yet")
-                        .font(.title2.weight(.semibold))
-                        .foregroundStyle(Color("AppTextPrimary"))
-                    Text("Add synopses and drafts to see charts of your reading shelf.")
+                        .font(.title3.weight(.semibold))
+                        .foregroundStyle(AppPalette.ink)
+                    Text("Add a synopsis or draft to see your reading activity.")
                         .font(.subheadline)
-                        .foregroundStyle(Color("AppTextSecondary"))
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal, 32)
+                        .foregroundStyle(AppPalette.muted)
                 }
-                Spacer()
             } else {
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 16) {
-                        summaryRow
+                summaryRow
 
-                        chartCard(title: "Library volume", subtitle: "Synopses vs drafts") {
-                            Chart(volumePoints) { point in
-                                BarMark(
-                                    x: .value("Type", point.name),
-                                    y: .value("Count", point.count)
-                                )
-                                .foregroundStyle(by: .value("Type", point.name))
-                                .cornerRadius(8)
-                            }
-                            .chartForegroundStyleScale([
-                                "Synopses": Color("AppPrimary"),
-                                "Drafts": Color("AppAccent")
-                            ])
-                            .chartLegend(.hidden)
-                            .frame(height: 180)
+                chartSection(title: "Library volume", subtitle: "Synopses vs drafts") {
+                    Chart(volumePoints) { point in
+                        BarMark(
+                            x: .value("Type", point.name),
+                            y: .value("Count", point.count)
+                        )
+                        .foregroundStyle(by: .value("Type", point.name))
+                        .cornerRadius(3)
+                    }
+                    .chartForegroundStyleScale([
+                        "Synopses": AppPalette.blue,
+                        "Drafts": AppPalette.accent
+                    ])
+                    .chartLegend(.hidden)
+                    .frame(height: 180)
+                }
+
+                if store.synopsisCount > 0 {
+                    chartSection(title: "Chapter status", subtitle: "Progress across synopses") {
+                        Chart(statusPoints) { point in
+                            BarMark(
+                                x: .value("Count", point.count),
+                                y: .value("Status", point.name)
+                            )
+                            .foregroundStyle(by: .value("Status", point.name))
+                            .cornerRadius(3)
                         }
+                        .chartForegroundStyleScale([
+                            ChapterStatus.inProgress.title: AppPalette.accent,
+                            ChapterStatus.done.title: AppPalette.blue
+                        ])
+                        .chartLegend(.hidden)
+                        .frame(height: 140)
 
-                        if store.synopsisCount > 0 {
-                            chartCard(title: "Chapter status", subtitle: "Progress across synopses") {
-                                Chart(statusPoints) { point in
-                                    BarMark(
-                                        x: .value("Count", point.count),
-                                        y: .value("Status", point.name)
-                                    )
-                                    .foregroundStyle(by: .value("Status", point.name))
-                                    .cornerRadius(8)
-                                }
-                                .chartForegroundStyleScale([
-                                    ChapterStatus.inProgress.title: Color("AppPrimary"),
-                                    ChapterStatus.done.title: Color("AppAccent")
-                                ])
-                                .chartLegend(.hidden)
-                                .frame(height: 140)
-
-                                HStack(spacing: 16) {
-                                    legendDot(color: Color("AppPrimary"), title: "In progress", value: store.inProgressSynopsisCount)
-                                    legendDot(color: Color("AppAccent"), title: "Done", value: store.doneSynopsisCount)
-                                }
+                        ViewThatFits(in: .horizontal) {
+                            HStack(spacing: 16) {
+                                legendDot(color: AppPalette.accent, title: "In progress", value: store.inProgressSynopsisCount)
+                                legendDot(color: AppPalette.blue, title: "Done", value: store.doneSynopsisCount)
                             }
-                        }
+                            .fixedSize(horizontal: true, vertical: false)
 
-                        chartCard(title: "Activity", subtitle: "Edits in the last 7 days") {
-                            Chart(activityPoints) { point in
-                                LineMark(
-                                    x: .value("Day", point.day, unit: .day),
-                                    y: .value("Edits", point.count)
-                                )
-                                .interpolationMethod(.catmullRom)
-                                .foregroundStyle(Color("AppAccent"))
-                                .lineStyle(StrokeStyle(lineWidth: 3))
-
-                                AreaMark(
-                                    x: .value("Day", point.day, unit: .day),
-                                    y: .value("Edits", point.count)
-                                )
-                                .interpolationMethod(.catmullRom)
-                                .foregroundStyle(
-                                    LinearGradient(
-                                        colors: [Color("AppAccent").opacity(0.35), Color("AppAccent").opacity(0.02)],
-                                        startPoint: .top,
-                                        endPoint: .bottom
-                                    )
-                                )
-
-                                PointMark(
-                                    x: .value("Day", point.day, unit: .day),
-                                    y: .value("Edits", point.count)
-                                )
-                                .foregroundStyle(Color("AppPrimary"))
-                            }
-                            .chartXAxis {
-                                AxisMarks(values: .stride(by: .day)) { _ in
-                                    AxisGridLine(stroke: StrokeStyle(lineWidth: 0.5))
-                                        .foregroundStyle(Color("AppTextSecondary").opacity(0.25))
-                                    AxisValueLabel(format: .dateTime.weekday(.abbreviated))
-                                        .foregroundStyle(Color("AppTextSecondary"))
-                                }
-                            }
-                            .chartYAxis {
-                                AxisMarks(position: .leading) { _ in
-                                    AxisGridLine(stroke: StrokeStyle(lineWidth: 0.5))
-                                        .foregroundStyle(Color("AppTextSecondary").opacity(0.25))
-                                    AxisValueLabel()
-                                        .foregroundStyle(Color("AppTextSecondary"))
-                                }
-                            }
-                            .frame(height: 200)
-                        }
-
-                        if !bookPoints.isEmpty {
-                            chartCard(title: "Books", subtitle: "Synopses per title") {
-                                Chart(bookPoints) { point in
-                                    BarMark(
-                                        x: .value("Count", point.count),
-                                        y: .value("Book", point.name)
-                                    )
-                                    .foregroundStyle(
-                                        LinearGradient(
-                                            colors: [Color("AppPrimary"), Color("AppAccent")],
-                                            startPoint: .leading,
-                                            endPoint: .trailing
-                                        )
-                                    )
-                                    .cornerRadius(6)
-                                }
-                                .frame(height: CGFloat(max(160, bookPoints.count * 36)))
+                            VStack(alignment: .leading, spacing: 6) {
+                                legendDot(color: AppPalette.accent, title: "In progress", value: store.inProgressSynopsisCount)
+                                legendDot(color: AppPalette.blue, title: "Done", value: store.doneSynopsisCount)
                             }
                         }
                     }
-                    .padding(16)
+                }
+
+                chartSection(title: "Activity", subtitle: "Edits in the last 7 days") {
+                    Chart(activityPoints) { point in
+                        LineMark(
+                            x: .value("Day", point.day, unit: .day),
+                            y: .value("Edits", point.count)
+                        )
+                        .interpolationMethod(.catmullRom)
+                        .foregroundStyle(AppPalette.accent)
+                        .lineStyle(StrokeStyle(lineWidth: 3))
+
+                        PointMark(
+                            x: .value("Day", point.day, unit: .day),
+                            y: .value("Edits", point.count)
+                        )
+                        .foregroundStyle(AppPalette.blue)
+                    }
+                    .chartXAxis {
+                        AxisMarks(values: .stride(by: .day)) { _ in
+                            AxisGridLine(stroke: StrokeStyle(lineWidth: 0.5))
+                                .foregroundStyle(AppPalette.muted.opacity(0.25))
+                            AxisValueLabel(format: .dateTime.weekday(.abbreviated))
+                                .foregroundStyle(AppPalette.muted)
+                        }
+                    }
+                    .chartYAxis {
+                        AxisMarks(position: .leading) { _ in
+                            AxisGridLine(stroke: StrokeStyle(lineWidth: 0.5))
+                                .foregroundStyle(AppPalette.muted.opacity(0.25))
+                            AxisValueLabel()
+                                .foregroundStyle(AppPalette.muted)
+                        }
+                    }
+                    .frame(height: 200)
+                }
+
+                if !bookPoints.isEmpty {
+                    chartSection(title: "Books", subtitle: "Synopses per title") {
+                        Chart(bookPoints) { point in
+                            BarMark(
+                                x: .value("Count", point.count),
+                                y: .value("Book", point.name)
+                            )
+                            .foregroundStyle(AppPalette.accent)
+                            .cornerRadius(3)
+                        }
+                        .frame(height: CGFloat(max(160, bookPoints.count * 36)))
+                    }
                 }
             }
         }
     }
 
     private var summaryRow: some View {
-        HStack(spacing: 10) {
-            summaryTile(title: "Synopses", value: store.synopsisCount)
-            summaryTile(title: "Drafts", value: store.draftCount)
-            summaryTile(title: "Linked", value: store.linkedDraftCount)
+        VStack(spacing: 0) {
+            JournalRule()
+            summaryLine(title: "Synopses", value: store.synopsisCount)
+            JournalRule()
+            summaryLine(title: "Drafts", value: store.draftCount)
+            JournalRule()
+            summaryLine(title: "Linked drafts", value: store.linkedDraftCount)
+            JournalRule()
         }
     }
 
-    private func summaryTile(title: String, value: Int) -> some View {
-        VStack(alignment: .leading, spacing: 4) {
+    private func summaryLine(title: String, value: Int) -> some View {
+        HStack {
             Text(title)
-                .font(.caption)
-                .foregroundStyle(Color("AppTextSecondary"))
-            Text("\(value)")
-                .font(.title3.weight(.bold))
-                .foregroundStyle(Color("AppTextPrimary"))
+                .font(.subheadline)
+                .foregroundStyle(AppPalette.ink)
+            Spacer()
+            Text(value, format: .number)
+                .font(.headline.monospacedDigit())
+                .foregroundStyle(AppPalette.accent)
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .surfaceCard()
+        .padding(.vertical, 10)
+        .accessibilityElement(children: .combine)
     }
 
-    private func chartCard<Content: View>(
+    private func chartSection<Content: View>(
         title: String,
         subtitle: String,
         @ViewBuilder content: () -> Content
     ) -> some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: 8) {
+            JournalRule()
             Text(title)
-                .font(.headline)
-                .foregroundStyle(Color("AppTextPrimary"))
+                .font(.title3.weight(.semibold))
+                .foregroundStyle(AppPalette.ink)
+                .accessibilityAddTraits(.isHeader)
             Text(subtitle)
                 .font(.caption)
-                .foregroundStyle(Color("AppTextSecondary"))
+                .foregroundStyle(AppPalette.muted)
             content()
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .surfaceCard()
+        .padding(.top, 6)
     }
 
     private func legendDot(color: Color, title: String, value: Int) -> some View {
@@ -216,7 +201,7 @@ struct StatisticsView: View {
                 .frame(width: 8, height: 8)
             Text("\(title): \(value)")
                 .font(.caption)
-                .foregroundStyle(Color("AppTextSecondary"))
+                .foregroundStyle(AppPalette.muted)
         }
     }
 }

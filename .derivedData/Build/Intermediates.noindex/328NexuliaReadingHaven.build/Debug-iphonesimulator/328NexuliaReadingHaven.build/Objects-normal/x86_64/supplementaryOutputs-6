@@ -1,0 +1,23 @@
+{
+  "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/328NexuliaReadingHaven/Models/BookSynopsis.swift" : {
+    "const-values" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/x86_64/BookSynopsis.swiftconstvalues",
+    "dependencies" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/x86_64/BookSynopsis.d",
+    "diagnostics" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/x86_64/BookSynopsis.dia",
+    "object" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/x86_64/BookSynopsis.o",
+    "swift-dependencies" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/x86_64/BookSynopsis.swiftdeps"
+  },
+  "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/328NexuliaReadingHaven/Models/SynopsisDraft.swift" : {
+    "const-values" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/x86_64/SynopsisDraft.swiftconstvalues",
+    "dependencies" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/x86_64/SynopsisDraft.d",
+    "diagnostics" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/x86_64/SynopsisDraft.dia",
+    "object" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/x86_64/SynopsisDraft.o",
+    "swift-dependencies" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/x86_64/SynopsisDraft.swiftdeps"
+  },
+  "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/328NexuliaReadingHaven/Resources/AppResources.swift" : {
+    "const-values" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/x86_64/AppResources.swiftconstvalues",
+    "dependencies" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/x86_64/AppResources.d",
+    "diagnostics" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/x86_64/AppResources.dia",
+    "object" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/x86_64/AppResources.o",
+    "swift-dependencies" : "/Users/roman/Documents/XcodeProgramm/11 comand Sasha/RIO/328NexuliaReadingHaven/.derivedData/Build/Intermediates.noindex/328NexuliaReadingHaven.build/Debug-iphonesimulator/328NexuliaReadingHaven.build/Objects-normal/x86_64/AppResources.swiftdeps"
+  }
+}

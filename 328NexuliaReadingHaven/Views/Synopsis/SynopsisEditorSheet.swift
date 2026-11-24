@@ -29,46 +29,34 @@ struct SynopsisEditorSheet: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 18) {
-                    fieldLabel("Book title")
-                    TextField("Book title", text: $bookTitle)
-                        .appFieldStyle()
-                        .textInputAutocapitalization(.words)
+            JournalPage {
+                JournalHeading(title: mode.navigationTitle)
+                AppTextField(
+                    title: "Book title",
+                    placeholder: "e.g. The Waves",
+                    text: $bookTitle,
+                    autocapitalization: .words
+                )
 
-                    fieldLabel("Chapter")
-                    TextField("Chapter", text: $chapter)
-                        .appFieldStyle()
+                AppTextField(
+                    title: "Chapter",
+                    placeholder: "Number or name",
+                    text: $chapter
+                )
 
-                    fieldLabel("Status")
-                    Picker("Status", selection: $chapterStatus) {
-                        ForEach(ChapterStatus.allCases) { status in
-                            Text(status.title).tag(status)
-                        }
+                AppSegmentedField(title: "Status", selection: $chapterStatus) {
+                    ForEach(ChapterStatus.allCases) { status in
+                        Text(status.title).tag(status)
                     }
-                    .pickerStyle(.segmented)
-                    .padding(4)
-                    .background(
-                        RoundedRectangle(cornerRadius: 14, style: .continuous)
-                            .fill(Color("AppSurface").opacity(0.85))
-                    )
-
-                    HStack {
-                        fieldLabel("Synopsis")
-                        Spacer()
-                        Text("\(characterCount) characters")
-                            .font(.caption)
-                            .foregroundStyle(Color("AppTextSecondary"))
-                    }
-                    TextEditor(text: $synopsisText)
-                        .scrollContentBackground(.hidden)
-                        .frame(minHeight: 180)
-                        .appFieldStyle()
                 }
-                .padding(16)
+
+                AppTextEditorField(
+                    title: "Synopsis",
+                    placeholder: "Summarize what happens in this chapter…",
+                    text: $synopsisText,
+                    accessory: "\(characterCount) characters"
+                )
             }
-            .appScreenBackground()
-            .navigationTitle(mode.navigationTitle)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
@@ -85,13 +73,6 @@ struct SynopsisEditorSheet: View {
                 Button("OK", role: .cancel) {}
             }
         }
-        .preferredColorScheme(.dark)
-    }
-
-    private func fieldLabel(_ text: String) -> some View {
-        Text(text)
-            .font(.caption.weight(.semibold))
-            .foregroundStyle(Color("AppTextSecondary"))
     }
 
     private func populateIfEditing() {

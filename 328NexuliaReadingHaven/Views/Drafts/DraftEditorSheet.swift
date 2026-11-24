@@ -45,70 +45,52 @@ struct DraftEditorSheet: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 18) {
-                    fieldLabel("Book title")
-                    TextField("Book title", text: $bookTitle)
-                        .appFieldStyle()
-                        .textInputAutocapitalization(.words)
+            JournalPage {
+                JournalHeading(title: mode.navigationTitle)
+                AppTextField(
+                    title: "Book title",
+                    placeholder: "e.g. The Waves",
+                    text: $bookTitle,
+                    autocapitalization: .words
+                )
 
-                    if !store.synopses.isEmpty {
-                        fieldLabel("Link to synopsis")
-                        Picker("Link to synopsis", selection: $linkedBookId) {
-                            Text("None").tag(UUID?.none)
-                            ForEach(store.synopses.sorted(by: { $0.bookTitle < $1.bookTitle })) { synopsis in
-                                Text(synopsis.bookTitle).tag(Optional(synopsis.id))
-                            }
-                        }
-                        .pickerStyle(.menu)
-                        .tint(Color("AppAccent"))
-                        .padding(14)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .background(
-                            RoundedRectangle(cornerRadius: 14, style: .continuous)
-                                .fill(Color("AppSurface").opacity(0.85))
-                        )
-                        .onChange(of: linkedBookId) { newValue in
-                            if let id = newValue, let synopsis = store.synopsis(for: id), bookTitle.isEmpty {
-                                bookTitle = synopsis.bookTitle
-                            }
+                if !store.synopses.isEmpty {
+                    AppMenuField(title: "Link to synopsis", selection: $linkedBookId) {
+                        Text("None").tag(UUID?.none)
+                        ForEach(store.synopses.sorted(by: { $0.bookTitle < $1.bookTitle })) { synopsis in
+                            Text(synopsis.bookTitle).tag(Optional(synopsis.id))
                         }
                     }
-
-                    HStack {
-                        fieldLabel("Draft")
-                        Spacer()
-                        Text("\(characterCount) / \(SynopsisDraft.minimumCharacterCount) min")
-                            .font(.caption)
-                            .foregroundStyle(meetsMinimum ? Color("AppAccent") : Color("AppTextSecondary"))
-                    }
-
-                    TextEditor(text: $draftText)
-                        .scrollContentBackground(.hidden)
-                        .frame(minHeight: 180)
-                        .appFieldStyle()
-
-                    ProgressView(value: progress)
-                        .tint(meetsMinimum ? Color("AppAccent") : Color("AppPrimary"))
-
-                    Text(meetsMinimum ? "Ready to save." : "Keep writing to reach the minimum length.")
-                        .font(.caption)
-                        .foregroundStyle(Color("AppTextSecondary"))
-
-                    if mode.existingDraft != nil {
-                        Button("Promote to synopsis") {
-                            promoteChapter = "1"
-                            showPromoteChapterPrompt = true
+                    .onChange(of: linkedBookId) { _, newValue in
+                        if let id = newValue, let synopsis = store.synopsis(for: id), bookTitle.isEmpty {
+                            bookTitle = synopsis.bookTitle
                         }
-                        .buttonStyle(PrimaryGradientButtonStyle())
-                        .frame(maxWidth: .infinity)
-                        .padding(.top, 8)
                     }
                 }
-                .padding(16)
+
+                AppTextEditorField(
+                    title: "Draft",
+                    placeholder: "Write a note, quote, or first impression…",
+                    text: $draftText,
+                    accessory: "\(characterCount) / \(SynopsisDraft.minimumCharacterCount) min"
+                )
+
+                ProgressView(value: progress)
+                    .tint(meetsMinimum ? Color("AppAccent") : Color("AppPrimary"))
+
+                Text(meetsMinimum ? "Ready to save." : "Keep writing to reach the minimum length.")
+                    .font(.caption)
+                    .foregroundStyle(Color("AppTextSecondary"))
+
+                if mode.existingDraft != nil {
+                    Button("Promote to synopsis") {
+                        promoteChapter = "1"
+                        showPromoteChapterPrompt = true
+                    }
+                    .buttonStyle(PressButtonStyle())
+                    .padding(.top, 4)
+                }
             }
-            .appScreenBackground()
-            .navigationTitle(mode.navigationTitle)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
@@ -132,13 +114,6 @@ struct DraftEditorSheet: View {
                 Text("A synopsis will be created from this draft.")
             }
         }
-        .preferredColorScheme(.dark)
-    }
-
-    private func fieldLabel(_ text: String) -> some View {
-        Text(text)
-            .font(.caption.weight(.semibold))
-            .foregroundStyle(Color("AppTextSecondary"))
     }
 
     private func populateIfEditing() {
